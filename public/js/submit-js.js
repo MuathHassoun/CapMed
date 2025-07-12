@@ -7,7 +7,7 @@ document.getElementById("telegram-contact-form").addEventListener("submit", asyn
   const message = form.message.value.trim();
 
   const responseDiv = document.getElementById("form-response");
-  responseDiv.innerText = "⏳ Sending...";
+  responseDiv.innerText = "⏳ Sending your request...";
   try {
     const res = await fetch("/api/telegram-handler", {
       method: "POST",
@@ -19,12 +19,12 @@ document.getElementById("telegram-contact-form").addEventListener("submit", asyn
 
     const data = await res.json();
     if (res.ok) {
-      responseDiv.innerText = "✅ Message sent successfully!";
+      responseDiv.innerText = "✅ Thank you! Your message has been received by CapstoneMed. Our team will contact you soon.";
       form.reset();
     } else {
-      responseDiv.innerText = "❌ Error: " + (data.error || "Something went wrong.");
+      responseDiv.innerText = "❌ Something went wrong while sending your message. Please try again later.";
     }
   } catch (err) {
-    responseDiv.innerText = "❌ Failed to send: " + err.message;
+    responseDiv.innerText = "❌ Failed to send your message. Please check your internet connection or try again later.";
   }
 });
